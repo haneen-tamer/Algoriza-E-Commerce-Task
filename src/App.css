@@ -1,0 +1,35 @@
+@use "./styles/theme-colors";
+@use "./styles/store";
+@use "./styles/navbar";
+@use "./styles/filter-panel";
+@use "./styles/side-menu";
+@use "./styles/products-panel";
+.content {
+  margin-left: 260px;
+  padding: 2rem;
+}
+
+#content-overlay {
+  display: none;
+}
+
+#content-overlay.show {
+  display: block;
+  position: fixed;
+  left: 260px;
+  z-index: 13;
+  background-color: rgba(34, 41, 47, 0.2);
+  border-radius: 0.1785rem;
+  width: calc(100% - 260px);
+  height: 100%;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+
+@media screen and (max-width: 1024px) {
+  .content {
+    margin-left: 0px;
+  }
+}
+/*# sourceMappingURL=App.css.map */

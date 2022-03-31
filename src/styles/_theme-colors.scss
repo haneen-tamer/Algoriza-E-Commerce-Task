@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@100&display=swap");
+
+$bckg-color: #161d31;
+$shadow: rgba(34, 41, 47, 0.1);
+$grey: #6e6b7b;
+$light-grey: #f8f8f8;
+$purple: #7367f0;
+$boxshadow: 0 4px 24px 0 $shadow;
+
+$font-family: "Montserrat", Helvetica, Arial, serif;
+body {
+  background-color: $bckg-color;
+  font-family: $font-family !important;
+  font-weight: 500;
+
+  button {
+    font-family: $font-family !important;
+    font-weight: 500;
+  }
+}
+body.light-mode {
+  $bckg-color: #f8f8f8;
+  color: $grey;
+  background-color: $bckg-color;
+  font-weight: 400;
+}
+//todo select sort in controls
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1rem auto;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+p {
+  font-weight: 400;
+}
+
+a {
+  font-weight: 600;
+  color: $grey;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $purple;
+}

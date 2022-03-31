@@ -1,0 +1,61 @@
+@use "./theme-colors" as *;
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2rem;
+  row-gap: 2rem;
+
+  margin: 2rem auto;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  margin: 2rem auto;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  justify-content: space-between;
+}
+
+.pagination {
+  display: inline-block;
+  margin: 2rem auto;
+  position: relative;
+  left: 22rem;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: $purple;
+  color: white;
+  border-radius: 50%;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: $purple;
+  color: white;
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (min-width: 481px) and (max-width: 991px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
