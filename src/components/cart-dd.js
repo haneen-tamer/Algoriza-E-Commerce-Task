@@ -9,12 +9,12 @@ const CartDropdown = () => {
     <div>
       <div className="cart-header">
         <h4>My Cart</h4>
-        <div class="bubble">{cartList.length} items</div>
+        <div className="bubble">{cartList.length} items</div>
       </div>
       <ul className="cart-items">
         {cartList.map((item) => {
           return (
-            <li className="cart-item">
+            <li className="cart-item" key={item.id}>
               <img src={item.img}></img>
               <div className="title">
                 <a href="#">{item.name}</a>

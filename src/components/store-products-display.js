@@ -1,14 +1,23 @@
 import ProductItem from "./product-item";
 import "../styles/_products-panel.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const Products = (props) => {
-  const pages = [...Array(Number(props.prodList.length / 9)).keys()];
-  let num = Number(props.prodList.length / pages.length);
+  let len = Math.round(props.prodList.length / 9)
+    ? Math.round(props.prodList.length / 9)
+    : 1;
+  const [pages, setPages] = useState([...Array(len).keys()]);
+
+  let num = Math.round(props.prodList.length / pages.length);
   const [currentPage, setCurrentPage] = useState(0);
   const [prodList, setProdList] = useState(props.prodList.slice(0, num));
   function jumpToPage(p) {
-    let num = Number(props.prodList.length / pages.length);
-    setProdList(props.prodList.slice(p * num, p * num + num));
+    let num = Math.round(props.prodList.length / pages.length);
+    let start = p * num;
+    let end =
+      p * num + num < props.prodList.length
+        ? p * num + num
+        : props.prodList.length;
+    setProdList(props.prodList.slice(start, end));
 
     document.getElementsByClassName("active")[0].classList.remove("active");
     document.getElementById(p).classList.add("active");
@@ -20,11 +29,22 @@ const Products = (props) => {
     jumpToPage(p);
   }
   function prevPage() {
+    if (currentPage - 1 < 0) return;
     jumpToPage(currentPage - 1);
   }
   function nextPage() {
+    if (currentPage + 1 >= pages.length) return;
     jumpToPage(currentPage + 1);
   }
+
+  useEffect(() => {
+    let len = Math.round(props.prodList.length / 9)
+      ? Math.round(props.prodList.length / 9)
+      : 1;
+    setPages([...Array(len).keys()]);
+    jumpToPage(0);
+  }, [props.prodList]);
+
   return (
     <div>
       <section className={props.isGrid ? "grid" : "list"}>
