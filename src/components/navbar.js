@@ -10,25 +10,17 @@ import {
   mdiMagnify,
   mdiCartOutline,
   mdiBellOutline,
+  mdiWeatherSunny,
 } from "@mdi/js";
 import "../styles/_navbar.scss";
 import { useState, useEffect } from "react";
-import CartDropdown from "./cart-dd";
-const Dropdown = (props) => {
-  const [list, setList] = useState(["dropdown-content", "card"]);
-  const handleShow = () => {
-    if (list.includes("show")) setList(["dropdown-content", "card"]);
-    else setList([...list, "show"]);
-  };
-  return (
-    <div className="dropdown">
-      <button onClick={handleShow} className="dropbtn">
-        {props.clickable}
-      </button>
-      <div className={list.join(" ")}>{props.children}</div>
-    </div>
-  );
-};
+
+import {
+  AdminDropdown,
+  CartDropdown,
+  Dropdown,
+  NotificationsDropdown,
+} from "./Dropdowns";
 
 const Navbar = ({ show, showHandler }) => {
   const user = {
@@ -46,51 +38,93 @@ const Navbar = ({ show, showHandler }) => {
     setTheme((prev) => {
       return prev === "light" ? "dark" : "light";
     });
+    e.preventDefault();
   };
 
   useEffect(() => {
+    let overlay = document.getElementById("sidemenu-overlay");
     if (show) {
       document.getElementById("side-menu").classList.add("show");
-      document.getElementById("content-overlay").classList.add("show");
-      document
-        .getElementById("content-overlay")
-        .addEventListener("onClick", showHandler);
+      overlay.classList.add("show");
+      overlay.addEventListener("mouseup", showHandler);
     } else {
       document.getElementById("side-menu").classList.remove("show");
-      document
-        .getElementById("content-overlay")
-        .removeEventListener("onClick", showHandler);
-      document.getElementById("content-overlay").classList.remove("show");
-      // console.log(document.getElementById("content-overlay"));
+      overlay.removeEventListener("mouseup", showHandler);
+      overlay.classList.remove("show");
+      // console.log(overlay);
     }
   }, [show]);
 
+  const IconSize = 1;
   return (
     <nav className="navbar card">
       <div className="left">
-        <a href="#" id="toggle-side-menu" onClick={showHandler}>
-          <Icon path={mdiMenu} size={0.8} />
-        </a>
+        <p id="toggle-side-menu" onClick={showHandler}>
+          <Icon path={mdiMenu} className="icon" size={IconSize} />
+        </p>
         <div id="nav-menu">
           <Icon
             path={mdiCalendarBlankOutline}
-            size={0.8}
+            size={IconSize}
+            className="icon"
             title="Calender App"
           />
-          <Icon path={mdiMessageOutline} size={0.8} title="Chat" />
-          <Icon path={mdiEmailOutline} size={0.8} title="Email" />
-          <Icon path={mdiCheckboxMarkedOutline} size={0.8} title="Todo" />
-          <Icon path={mdiStarOutline} size={0.8} color="orange" />
+          <Icon
+            path={mdiMessageOutline}
+            size={IconSize}
+            className="icon"
+            title="Chat"
+          />
+          <Icon
+            path={mdiEmailOutline}
+            size={IconSize}
+            className="icon"
+            title="Email"
+          />
+          <Icon
+            path={mdiCheckboxMarkedOutline}
+            className="icon"
+            size={IconSize}
+            title="Todo"
+          />
+          <Icon
+            path={mdiStarOutline}
+            className="icon"
+            size={IconSize}
+            color="orange"
+          />
         </div>
       </div>
       <div className="right">
-        <Icon path={mdiWeatherNight} size={0.8} onClick={toggleTheme} />
-        <Icon path={mdiMagnify} size={0.8} />
-        <Dropdown clickable={<Icon path={mdiCartOutline} size={0.8} />}>
+        {theme === "light" ? (
+          <Icon
+            path={mdiWeatherNight}
+            className="icon"
+            size={IconSize}
+            onClick={toggleTheme}
+          />
+        ) : (
+          <Icon
+            path={mdiWeatherSunny}
+            className="icon"
+            size={IconSize}
+            onClick={toggleTheme}
+          />
+        )}
+        <Icon path={mdiMagnify} className="icon" size={IconSize} />
+        <Dropdown
+          clickable={
+            <Icon path={mdiCartOutline} className="icon" size={IconSize} />
+          }
+        >
           <CartDropdown />
         </Dropdown>
-        <Dropdown clickable={<Icon path={mdiBellOutline} size={0.8} />}>
-          <p>notifications</p>
+        <Dropdown
+          clickable={
+            <Icon path={mdiBellOutline} className="icon" size={IconSize} />
+          }
+        >
+          <NotificationsDropdown />
         </Dropdown>
         <Dropdown
           clickable={
@@ -110,7 +144,7 @@ const Navbar = ({ show, showHandler }) => {
             </div>
           }
         >
-          <p>user panel</p>
+          <AdminDropdown />
         </Dropdown>
       </div>
     </nav>

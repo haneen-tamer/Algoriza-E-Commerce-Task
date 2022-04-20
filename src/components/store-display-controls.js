@@ -111,11 +111,11 @@ const Controls = ({
         <input
           type="text"
           name="search"
-          placeholder="Search Product"
+          placeholder="search product"
           value={searchTxt}
           onChange={handleSearch}
         />
-        <Icon path={mdiMagnify} size={1} color="#6e6b7b" />
+        <Icon path={mdiMagnify} size={1} />
       </div>
     </section>
   );

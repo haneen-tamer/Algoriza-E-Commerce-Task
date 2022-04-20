@@ -10,39 +10,47 @@ const Products = (props) => {
   let num = Math.round(props.prodList.length / pages.length);
   const [currentPage, setCurrentPage] = useState(0);
   const [prodList, setProdList] = useState(props.prodList.slice(0, num));
-  function jumpToPage(p) {
+  // const [pages, setPages] = useState([]);
+  // const [currentPage, setCurrentPage] = useState(0);
+  // const [prodList, setProdList] = useState([]);
+
+  const jumpToPage = (p, pages) => {
     let num = Math.round(props.prodList.length / pages.length);
     let start = p * num;
     let end =
       p * num + num < props.prodList.length
         ? p * num + num
         : props.prodList.length;
+    console.log(`displaying ${num} items from ${start} to ${end}`);
+    console.log(`div ${props.prodList.length}  ${pages.length}`);
     setProdList(props.prodList.slice(start, end));
 
     document.getElementsByClassName("active")[0].classList.remove("active");
     document.getElementById(p).classList.add("active");
 
     setCurrentPage(p);
-  }
+  };
   function pageClick(e) {
     let p = e.target.id;
-    jumpToPage(p);
+    jumpToPage(p, pages);
   }
   function prevPage() {
     if (currentPage - 1 < 0) return;
-    jumpToPage(currentPage - 1);
+    jumpToPage(currentPage - 1, pages);
   }
   function nextPage() {
     if (currentPage + 1 >= pages.length) return;
-    jumpToPage(currentPage + 1);
+    jumpToPage(currentPage + 1, pages);
   }
 
   useEffect(() => {
     let len = Math.round(props.prodList.length / 9)
       ? Math.round(props.prodList.length / 9)
       : 1;
-    setPages([...Array(len).keys()]);
-    jumpToPage(0);
+    console.log(`displaying ${len} pages`);
+    let p = [...Array(len).keys()];
+    setPages(p);
+    jumpToPage(0, p);
   }, [props.prodList]);
 
   return (
@@ -59,7 +67,7 @@ const Products = (props) => {
         {pages.map((i) => {
           return (
             <a
-              className={`page ${i == 0 ? "active" : ""}`}
+              className={`page ${i === 0 ? "active" : ""}`}
               key={i}
               id={i}
               onClick={pageClick}

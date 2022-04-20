@@ -85,19 +85,16 @@ const StoreFilters = ({ prodList, listHandler, show, showHandler }) => {
   }, [prodList]);
 
   useEffect(() => {
+    let overlay = document.getElementById("filter-overlay");
     if (show) {
       document.getElementById("filters").classList.add("show");
-      document.getElementById("content-overlay").classList.add("show");
-      document
-        .getElementById("content-overlay")
-        .addEventListener("onClick", showHandler);
+      overlay.classList.add("show");
+      overlay.addEventListener("mouseup", showHandler);
     } else {
       document.getElementById("filters").classList.remove("show");
-      document
-        .getElementById("content-overlay")
-        .removeEventListener("onClick", showHandler);
-      document.getElementById("content-overlay").classList.remove("show");
-      // console.log(document.getElementById("content-overlay"));
+      overlay.removeEventListener("mouseup", showHandler);
+      overlay.classList.remove("show");
+      // console.log(overlay);
     }
   }, [show]);
 

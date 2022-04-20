@@ -2,7 +2,6 @@
 
 .store {
   width: 100%;
-  margin-top: 6rem;
 
   display: flex;
   justify-content: space-around;
@@ -15,7 +14,7 @@
 
 .card {
   box-shadow: 0 4px 24px 0 $shadow;
-  background-color: white;
+  // background-color: white;
   border-radius: 0.428rem;
   border: none;
   padding: 0.1rem 0.25rem;

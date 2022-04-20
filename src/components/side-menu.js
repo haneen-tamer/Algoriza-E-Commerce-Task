@@ -33,14 +33,15 @@ const NavItem = (props) => {
       setExpanded((prev) => !prev);
     }
   };
+  const styles = { icon: { marginRight: "1.1rem" } };
   return (
     <li onClick={handleClick}>
       <div className="nav-item">
-        {props.icon && <Icon path={props.icon} size={1.2} color="#5e5873" />}
-        <h3>{props.title}</h3>
-        {props.hasSub && (
-          <Icon path={mdiChevronRight} size={0.8} color="#5e5873" />
+        {props.icon && (
+          <Icon path={props.icon} size={0.9} style={styles.icon} />
         )}
+        <h3>{props.title}</h3>
+        {props.hasSub && <Icon path={mdiChevronRight} size={0.8} />}
       </div>
       {props.hasSub && isExpanded && <ul className="sub">{props.children}</ul>}
     </li>

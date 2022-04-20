@@ -5,10 +5,12 @@ import "../styles/_products-panel.scss";
 
 const ProductItem = ({ item, isGrid }) => {
   return (
-    <article className="card" style={styles.card}>
+    <article className="card hov" style={styles.card}>
       {isGrid ? (
         <div>
-          <img src={item.img} style={styles.img} />
+          <a href="#">
+            <img src={item.img} style={styles.img} />
+          </a>
           <div style={styles.container}>
             <Rating rating={item.rating} />
             <h6>${item.price}</h6>
@@ -16,7 +18,7 @@ const ProductItem = ({ item, isGrid }) => {
           <a href="#">{item.name}</a>
           <p style={styles.desc}>{item.discription}</p>
           <div style={styles.container}>
-            <button style={styles.button}>
+            <button style={styles.button} className="btn-wishlist">
               <Icon path={mdiCardsHeartOutline} size={0.8} />
               Wishlist
             </button>
@@ -28,7 +30,9 @@ const ProductItem = ({ item, isGrid }) => {
         </div>
       ) : (
         <div className="grid2">
-          <img src={item.img} />
+          <a href="#">
+            <img src={item.img} />
+          </a>
           <div style={styles.midSection}>
             <a href="#">{item.name}</a>
             <h5>
@@ -41,7 +45,7 @@ const ProductItem = ({ item, isGrid }) => {
             <p style={{ ...styles.twilightText, ...styles.block }}>
               ${item.price}
             </p>
-            <button style={styles.button}>
+            <button style={styles.button} className="btn-wishlist">
               <Icon path={mdiCardsHeartOutline} size={0.8} />
               Wishlist
             </button>
@@ -68,7 +72,7 @@ const styles = {
   },
   container: {
     display: "flex",
-    alignItems: "space-around",
+    // alignItems: "space-around",
     justifyItems: "center",
   },
   img: {

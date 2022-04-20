@@ -1,0 +1,40 @@
+@use "./theme-colors" as *;
+#header {
+  margin-top: 6rem;
+
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.bordered {
+  border-right: 1px solid $grey;
+  padding-right: 1rem;
+  font-size: 1.714rem;
+}
+
+.breadcrumb-list {
+  list-style-type: none;
+  padding-inline-start: 0;
+  margin-block-end: 0;
+  margin-block-start: 0;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.breadcrumb-item {
+  @include clickable();
+}
+
+.row {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#btn {
+  @include btnSettings();
+}
+
+#btn:hover {
+  box-shadow: 0 8px 25px -8px #7367f0;
+}

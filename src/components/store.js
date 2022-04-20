@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import StoreProductsDisplay from "./store-products-display";
 import "../styles/_store.scss";
 import products from "../data/store-data";
+
 const Store = () => {
   const [filteredProdList, setProdList] = useState(products);
   const [lastFilterType, setLastFilterType] = useState("clear");
@@ -14,20 +15,35 @@ const Store = () => {
     });
   };
   const handleProdList = (type, filter) => {
+    console.log(`${type} filter after ${lastFilterType}`);
     if (type === "sort") {
       setLastFilterType(type);
-      setProdList(filteredProdList.sort(filter));
-      return;
+      setProdList([...filteredProdList.sort(filter)]);
+      console.log(filter);
+    } else {
+      let list =
+        type.includes(lastFilterType) || lastFilterType === "clear"
+          ? products
+          : filteredProdList;
+      console.log(
+        `searching on ${
+          type.includes(lastFilterType) || lastFilterType === "clear"
+            ? "products"
+            : "filteredProdList"
+        }`
+      );
+      setLastFilterType(type);
+      let res = list.filter(filter);
+      setProdList(res);
+      console.log(`${res.length} results`);
     }
-    let list = type.includes(lastFilterType) ? products : filteredProdList;
-    setLastFilterType(type);
-    setProdList(list.filter(filter));
-    console.log(`list is ${filteredProdList.length}`);
   };
-  const [showFilters, setShowFilters] = useState(false); //CHANGE TO FALSE
-  const toggleShowFilter = () => {
+  const [showFilters, setShowFilters] = useState(false);
+  function toggleShowFilter(e) {
     setShowFilters((prev) => !prev);
-  };
+    e.stopPropagation();
+    e.preventDefault();
+  }
 
   return (
     <div>
