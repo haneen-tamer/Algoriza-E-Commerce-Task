@@ -89,11 +89,12 @@ const styles = {
     fontSize: "0.875rem",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    display: "-webkit-box",
+
     lineHeight: "1.5rem",
+    maxHeight: "10rem",
   },
   button: {
-    width: "50%",
+    width: "100%",
     flexGrow: "1",
     border: "none",
     backgroundColor: "#f8f8f8",
